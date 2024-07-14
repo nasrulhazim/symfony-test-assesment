@@ -19,6 +19,11 @@ class Location
     private ?string $name = null;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $outsideMajorCity;
+
+    /**
      * @var Collection<int, Customer>
      */
     #[ORM\OneToMany(targetEntity: Customer::class, mappedBy: 'relation')]
@@ -49,6 +54,18 @@ class Location
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function isOutsideMajorCity(): ?bool
+    {
+        return $this->outsideMajorCity;
+    }
+
+    public function setOutsideMajorCity(bool $outsideMajorCity): self
+    {
+        $this->outsideMajorCity = $outsideMajorCity;
 
         return $this;
     }
