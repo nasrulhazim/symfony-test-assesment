@@ -1,5 +1,7 @@
 # Test Assesment
 
+Author: [Nasrul Hazim](https://github.com/nasrulhazim)
+
 **Scenario**
 Our in-house operating system manages orders for our e-commerce platform. We need a new feature to calculate and display the estimated delivery time for each order based on various factors.
 
