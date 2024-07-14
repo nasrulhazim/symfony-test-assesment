@@ -18,8 +18,8 @@ class Customer
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'customers')]
-    private ?Location $relation = null;
+    #[ORM\ManyToOne(targetEntity: Location::class, inversedBy: 'customers')]
+    private ?Location $location = null;
 
     /**
      * @var Collection<int, Order>
@@ -56,14 +56,14 @@ class Customer
         return $this;
     }
 
-    public function getRelation(): ?Location
+    public function getLocation(): ?Location
     {
-        return $this->relation;
+        return $this->location;
     }
 
-    public function setRelation(?Location $relation): static
+    public function setLocation(?Location $location): static
     {
-        $this->relation = $relation;
+        $this->location = $location;
 
         return $this;
     }
