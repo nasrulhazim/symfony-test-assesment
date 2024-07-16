@@ -130,3 +130,7 @@ Once you are registered, check mailpit at `http://0.0.0.0:8025` for new registra
 <center>
 <img src="assets/verify-email.png">
 </center>
+
+Proceed to login if requested. You should be able to verify your account once completed the login.
+
+> Addon: If you try to visit `/register` now, you should be redirect to `/dashboard` instead.
