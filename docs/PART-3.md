@@ -61,7 +61,6 @@ Referecences:
 
 - <https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider>
 
-
 Update the Security Bundle
 
 ```bash
@@ -86,31 +85,48 @@ Run the migration:
 php bin/console doctrine:migrations:migrate
 ```
 
-
-
-```bash
-php bin/console make:registration-form
-```
-
-Install verify email package:
+Setting up verify email:
 
 ```bash
 composer require symfonycasts/verify-email-bundle
 ```
 
-In `RegistrationController::verifyUserEmail()`:
+Setup registration form:
 
-- [ ] Customize the last `redirectToRoute()` after a successful email verification.
-- [ ] Make sure you're rendering success flash messages or change the `$this->addFlash()` line.
+```bash
+php bin/console make:registration-form
+```
+
+Create dashboard controller, to redirect user after registration:
+
+```bash
+php bin/console make:controller DashboardController
+```
+
+Then update the redirect route in `RegisterController` to `app_dashboard`.
 
 Run `php bin/console make:migration` to generate a migration for the newly added `User::isVerified` property.
 
+Then run `php bin/console doctrine:migrations:migrate`
+
+In `RegistrationController::verifyUserEmail()`, customize the last `redirectToRoute()` after a successful email verification to `app_dashboard`.
+
+next, make sure you have `mailpit` installed and configured in `.env`:
+
+```plaintext
+MAILER_DSN=smtp://127.0.0.1:1025
+```
+
+Then run the messenger:
+
+```bash
+php bin/console messenger:consume async --time-limit=3600 --memory-limit=128M
+```
+
 Then open your browser, go to `/register` to the registration with verify email.
 
-Once you are registered, you can verify you already logged in as in debugger at the bottom:
+Once you are registered, check mailpit at `http://0.0.0.0:8025` for new registration verification email:
 
 <center>
-<img src="assets/register-logged-in.png" >
+<img src="assets/verify-email.png">
 </center>
-
-
